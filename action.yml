@@ -1,8 +1,6 @@
 name: 'Build and Deploy to Kubernetes'
 description: 'Builds a Docker image, pushes it to GitHub Container Registry, and deploys it to Kubernetes'
-branding:
-  icon: 'cloud'  # Action için bir simge
-  color: 'blue'  # Action için bir renk
+
 inputs:
   DOCKERFILE_PATH:
     description: 'Path to the Dockerfile'
