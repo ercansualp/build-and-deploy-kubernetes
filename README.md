@@ -1,13 +1,13 @@
 # v1 - Initial Release
 
-This is the first version of the `build-and-deploy-k8s` Composite Action. It automates the process of:
+This is the first version of the `build-and-deploy-kubernetes` Composite Action. It automates the process of:
 - Building a Docker image
 - Pushing it to GitHub Container Registry
 - Deploying it to a Kubernetes cluster
 
 ### Usage
 ```yaml
-- uses: ercansualp/build-and-deploy-k8s@v1
+- uses: ercansualp/build-and-deploy-kubernetes@v1
   with:
     DOCKERFILE_PATH: 'path/to/Dockerfile'
     DEPLOYMENTFILE_PATH: 'path/to/deployment.yaml'
