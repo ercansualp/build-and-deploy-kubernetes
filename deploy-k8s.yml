@@ -1,0 +1,72 @@
+name: Reusable Deploy to Kubernetes
+
+on:
+  workflow_call:
+    inputs:
+      DOCKERFILE_PATH: 
+        required: true
+        type: string
+        
+      DEPLOYMENTFILE_PATH: 
+        required: true
+        type: string
+      
+      IMAGE_NAME: 
+        required: true
+        type: string
+      
+      IMAGE_TAG:
+        required: false
+        type: string
+        default: '${{ github.run_id }}'
+      
+      REPOSITORY: 
+        required: false
+        type: string
+        default: 'ercansualp/build-and-deploy-kubernetes'
+      
+      IMAGE_PULL_SECRETS: 
+        required: false
+        type: string
+        default: 'regcred'
+      
+      NAMESPACE: 
+        required: false
+        type: string
+        default: 'default'
+      
+      DIRECTORY: 
+        required: false
+        type: string
+        default: '.'
+
+      USERNAME:
+        required: false
+        type: string
+        default: '${{ github.repository_owner }}'
+    
+    secrets:
+      KUBE_CONFIG:
+        required: true
+      
+      PERSONAL_ACCESS_TOKEN:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ercansualp/build-and-deploy-k8s@v1
+        with:
+          DOCKERFILE_PATH: ${{ inputs.DOCKERFILE_PATH }}
+          DEPLOYMENTFILE_PATH: ${{ inputs.DEPLOYMENTFILE_PATH }}
+          IMAGE_NAME: ${{ inputs.IMAGE_NAME }}
+          IMAGE_TAG: ${{ inputs.IMAGE_TAG }}
+          REPOSITORY: ${{ inputs.REPOSITORY }}
+          USERNAME: '${{ inputs.USERNAME }}'
+          IMAGE_PULL_SECRETS: ${{ inputs.IMAGE_PULL_SECRETS }}
+          K8S_NAMESPACE: ${{ inputs.NAMESPACE }}
+          ROOT_DIRECTORY: ${{ inputs.DIRECTORY }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
