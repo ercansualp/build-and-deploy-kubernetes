@@ -36,7 +36,7 @@ jobs:
           DEPLOYMENTFILE_PATH: ${{ inputs.DEPLOYMENTFILE_PATH }}
           IMAGE_NAME: ${{ inputs.IMAGE_NAME }}
           IMAGE_TAG: ${{ inputs.IMAGE_TAG }}
-          REPOSITORY: ${{ vars.REPOSITORY }}
+          REPOSITORY: ${{ github.repository }}
           USERNAME: ${{ github.repository_owner }}
           IMAGE_PULL_SECRETS: ${{ vars.IMAGE_PULL_SECRETS }}
           K8S_NAMESPACE: ${{ inputs.K8S_NAMESPACE }}
